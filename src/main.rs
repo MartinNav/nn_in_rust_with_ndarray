@@ -1,5 +1,4 @@
 use ndarray::prelude::*;
-use rand::prelude::*;
 use rand::Rng;
 pub struct Activation {
     pub function: fn(&f32) -> f32,
@@ -24,11 +23,11 @@ impl Network {
 
             let _ = wm
                 .iter_mut()
-                .map(|mut m| *m += rng.gen::<f32>())
+                .map(|m| *m += rng.gen::<f32>())
                 .collect::<Vec<_>>();
             let _ = bm
                 .iter_mut()
-                .map(|mut m| *m += rng.gen::<f32>())
+                .map(|m| *m += rng.gen::<f32>())
                 .collect::<Vec<_>>();
             w.push(wm);
             b.push(bm);
@@ -58,7 +57,7 @@ impl Network {
             current = &self.weights[i].dot(&current) + &self.bias[i];
             let _: Vec<_> = current
                 .iter_mut()
-                .map(|mut m| *m = (self.activation.function)(m))
+                .map(|m| *m = (self.activation.function)(m))
                 .collect();
             self.data.push(current.clone());
         }
@@ -106,9 +105,9 @@ fn main() {
             }
         },
     };
-    let mut NN = Network::new(vec![2, 4, 4, 1], activation, 0.01);
+    let mut nn= Network::new(vec![2, 4, 4, 1], activation, 0.01);
     println!("NOW TRAINING:");
-    //NN.print();
+    //nn.print();
     let inputs = vec![
         Array2::from(vec![[0.0], [0.0]]),
         Array2::from(vec![[1.0], [0.0]]),
@@ -123,33 +122,33 @@ fn main() {
     ];
     println!(
         "before{:?}",
-        NN.feed_forward(Array2::from(vec![[0.0], [1.0]]))
+        nn.feed_forward(Array2::from(vec![[0.0], [1.0]]))
     );
-    NN.train(inputs, outputs, 3000);
+    nn.train(inputs, outputs, 3000);
     println!(
         "after{:?}",
-        NN.feed_forward(Array2::from(vec![[0.0], [1.0]]))
+        nn.feed_forward(Array2::from(vec![[0.0], [1.0]]))
     );
     println!("AFTER TRAINING:");
-    //NN.print();
+    //nn.print();
     println!(
         "1 1 {}",
-        NN.feed_forward(Array2::from(vec![[1.0], [1.0]]))
+        nn.feed_forward(Array2::from(vec![[1.0], [1.0]]))
             .into_raw_vec()[0]
     );
     println!(
         "0 1 {}",
-        NN.feed_forward(Array2::from(vec![[0.0], [1.0]]))
+        nn.feed_forward(Array2::from(vec![[0.0], [1.0]]))
             .into_raw_vec()[0]
     );
     println!(
         "1 0 {}",
-        NN.feed_forward(Array2::from(vec![[1.0], [0.0]]))
+        nn.feed_forward(Array2::from(vec![[1.0], [0.0]]))
             .into_raw_vec()[0]
     );
     println!(
         "0 0 {}",
-        NN.feed_forward(Array2::from(vec![[0.0], [0.0]]))
+        nn.feed_forward(Array2::from(vec![[0.0], [0.0]]))
             .into_raw_vec()[0]
     );
 }
