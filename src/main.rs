@@ -90,17 +90,6 @@ impl Network {
     }
 }
 fn main() {
-    /*let input = array![
-    [1f32,1f32,0f32],
-    [0f32,1f32,0f32],
-    [0f32,0f32,1f32],
-    ];
-    let second = array![
-    [1f32,2f32,3f32],
-    [4f32,5f32,6f32],
-    [7f32,8f32,9f32],
-    ];
-    println!("{:?}",&input.dot(&second));*/
     let activation = Activation {
         function: |x: &f32| -> f32 {
             if *x > 0. {
