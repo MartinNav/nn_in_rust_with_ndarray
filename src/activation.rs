@@ -39,5 +39,12 @@ Activation {
             derivation:d,
         }
     }
+    pub fn sin()->Self{
+        Activation { function: |x:&f32|->f32{
+            x.sin()
+        }, derivation: |x:&f32|->f32{
+                x.cos()
+            } }
+    }
     
 }
