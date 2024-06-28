@@ -88,7 +88,7 @@ impl Network {
 }
 fn main() {
     //let mut nn= Network::new(vec![2, 4, 4, 1], activation, 0.01);
-    let mut nn= Network::new(vec![2, 4, 4, 1], Activation::abs_sin(), 0.01);
+    let mut nn= Network::new(vec![2, 4, 4, 1], Activation::softmax(), 0.01);
     println!("NOW TRAINING:");
     //nn.print();
     let inputs = vec![
