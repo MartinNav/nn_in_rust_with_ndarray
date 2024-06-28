@@ -87,24 +87,8 @@ impl Network {
     }
 }
 fn main() {
-    let activation = Activation {
-        function: |x: &f32| -> f32 {
-            if *x > 0. {
-                return *x;
-            } else {
-                0.
-            }
-        },
-        derivation: |x: &f32| -> f32 {
-            if *x > 0. {
-                return 1.0;
-            } else {
-                0.
-            }
-        },
-    };
     //let mut nn= Network::new(vec![2, 4, 4, 1], activation, 0.01);
-    let mut nn= Network::new(vec![2, 4, 4, 1], Activation::experimental_x3(), 0.0001);
+    let mut nn= Network::new(vec![2, 4, 4, 1], Activation::softmax(), 0.01);
     println!("NOW TRAINING:");
     //nn.print();
     let inputs = vec![
