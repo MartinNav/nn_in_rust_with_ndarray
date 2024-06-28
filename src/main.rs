@@ -76,9 +76,9 @@ impl Network {
     }
     pub fn train(&mut self, inputs: Vec<Array2<f32>>, targets: Vec<Array2<f32>>, epochs: u32) {
         for i in 1..=epochs {
-            /*if (epochs%10)==0 {
+            if (i%100)==0 {
                 println!("Epoch {i} out of {epochs}");
-            }*/
+            }
             for j in 0..inputs.len() {
                 let out = self.feed_forward(inputs[j].clone());
                 self.back_prop(out, targets[j].clone());
