@@ -43,7 +43,7 @@ impl Activation {
             function: |x: &f32| -> f32 { x.sin().abs() },
             derivation: |x: &f32| -> f32 {
                 if x.sin() <= 0. {
-                    return 0.;
+                    return -x.cos();
                 }
                 x.cos()
             },
