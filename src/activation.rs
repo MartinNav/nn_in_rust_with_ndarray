@@ -49,4 +49,24 @@ impl Activation {
             },
         }
     }
+    /// Softmax activation function modified by adding bit of sinusoid on top
+    pub fn sin_max()->Self{
+        Activation{
+            function: |x:&f32|->f32{
+                if *x<0. {
+                    return 1.;
+                }
+                (x.sin()+1.)*x
+            },
+            derivation: |x:&f32|->f32{
+                if *x<0. {
+                   return 0.; 
+                }
+                x.sin()+x*x.cos()+1.
+
+
+            }
+        }
+
+    }
 }
