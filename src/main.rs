@@ -1,9 +1,7 @@
 use ndarray::prelude::*;
 use rand::Rng;
-pub struct Activation {
-    pub function: fn(&f32) -> f32,
-    pub derivation: fn(&f32) -> f32,
-}
+mod activation;
+use crate::activation::Activation;
 pub struct Network {
     layers: Vec<usize>,
     weights: Vec<Array2<f32>>,
@@ -105,7 +103,8 @@ fn main() {
             }
         },
     };
-    let mut nn= Network::new(vec![2, 4, 4, 1], activation, 0.01);
+    //let mut nn= Network::new(vec![2, 4, 4, 1], activation, 0.01);
+    let mut nn= Network::new(vec![2, 4, 4, 1], Activation::experimental_x3(), 0.0001);
     println!("NOW TRAINING:");
     //nn.print();
     let inputs = vec![
